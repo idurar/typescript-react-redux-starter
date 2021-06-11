@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { selectCategoryList } from "../../redux/category/selectors";
-// import history from "../../utils/history";
+
 import { Icon } from "../Icon";
 
 type MenuItemProps = {

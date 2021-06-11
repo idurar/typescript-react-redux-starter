@@ -1,88 +1,48 @@
-// import {
-//   FaBoxOpen,
-//   FaTshirt,
-//   FaHatCowboy,
-//   FaBath,
-//   FaSpaceShuttle,
-//   FaGlasses,
-//   FaCat,
-// } from "react-icons/fa";
-// import { IoIosBowtie } from "react-icons/io";
+import {
+  FaBoxOpen,
+  FaTshirt,
+  FaHatCowboy,
+  FaBath,
+  FaSpaceShuttle,
+  FaGlasses,
+  FaCat,
+} from "react-icons/fa";
+import { IoIosBowtie } from "react-icons/io";
 
 type IconProps = { name: string };
-
-// export const Icon: React.FC<IconProps> = ({ name }) => {
-//   switch (name) {
-//     case "boxes": {
-//       return <FaBoxOpen />;
-//     }
-
-//     case "clothes": {
-//       return <FaTshirt />;
-//     }
-
-//     case "hats": {
-//       return <FaHatCowboy />;
-//     }
-
-//     case "sinks": {
-//       return <FaBath />;
-//     }
-
-//     case "space": {
-//       return <FaSpaceShuttle />;
-//     }
-
-//     case "sunglasses": {
-//       return <FaGlasses />;
-//     }
-
-//     case "ties": {
-//       return <IoIosBowtie />;
-//     }
-
-//     default:
-//       {
-//         return <FaCat />;
-//       }
-//       break;
-//   }
-// };
 
 export const Icon: React.FC<IconProps> = ({ name }) => {
   switch (name) {
     case "boxes": {
-      return <div>icon</div>;
+      return <FaBoxOpen />;
     }
 
     case "clothes": {
-      return <div>icon</div>;
+      return <FaTshirt />;
     }
 
     case "hats": {
-      return <div>icon</div>;
+      return <FaHatCowboy />;
     }
 
     case "sinks": {
-      return <div>icon</div>;
+      return <FaBath />;
     }
 
     case "space": {
-      return <div>icon</div>;
+      return <FaSpaceShuttle />;
     }
 
     case "sunglasses": {
-      return <div>icon</div>;
+      return <FaGlasses />;
     }
 
     case "ties": {
-      return <div>icon</div>;
+      return <IoIosBowtie />;
     }
 
-    default:
-      {
-        return <div>icon</div>;
-      }
-      break;
+    default: {
+      return <FaCat />;
+    }
   }
 };

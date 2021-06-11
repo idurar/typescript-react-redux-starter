@@ -18,6 +18,7 @@
         "history": "^5.0.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-icons": "^4.2.0",
         "react-redux": "^7.2.4",
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
@@ -49,6 +50,7 @@
     },
     "devDependencies": {
         "@types/redux-logger": "^3.0.8",
+        "@types/styled-components": "^5.1.10",
         "@typescript-eslint/eslint-plugin": "^4.26.0",
         "@typescript-eslint/parser": "^4.26.0",
         "eslint": "^7.27.0",
