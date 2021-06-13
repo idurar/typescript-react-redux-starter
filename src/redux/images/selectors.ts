@@ -1,8 +1,13 @@
 import { createSelector } from "reselect";
 
-export const selectImages = (state: any) => state.images;
+export const selectImage = (state: any) => state.images;
 
-export const selectImagesList = createSelector(
-  [selectImages],
-  (images): any[] => images.result
+export const selectImageList = createSelector(
+  selectImage,
+  (images): { id: string; name: string }[] => images.result
 );
+
+export const selectImageById = (imagesId: string) =>
+  createSelector(selectImageList, (list) =>
+    list.find((images) => images.id == imagesId)
+  );

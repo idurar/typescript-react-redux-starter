@@ -1,36 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  placeholderImg?: string;
-  errorImg?: string;
-}
-const ImageWrapper = ({
-  src,
-  placeholderImg,
-  errorImg,
-  ...props
-}: ImageProps) => {
-  const [imgSrc, setSrc] = useState(placeholderImg || src);
+import React from "react";
+import { useImage } from "../../hooks/useImage";
+import Loading from "../Loading";
 
-  const onLoad = useCallback(() => {
-    setSrc(src);
-  }, [src]);
+const Image: React.FC<{ src: string }> = ({ src }) => {
+  const { hasLoaded, hasError, localUrl } = useImage(src);
 
-  const onError = useCallback(() => {
-    setSrc(errorImg || placeholderImg);
-  }, [errorImg, placeholderImg]);
+  if (hasError) {
+    return null;
+  }
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = src as string;
-    img.addEventListener("load", onLoad);
-    img.addEventListener("error", onError);
-    return () => {
-      img.removeEventListener("load", onLoad);
-      img.removeEventListener("error", onError);
-    };
-  }, [src, onLoad, onError]);
-
-  return <img {...props} src={imgSrc} />;
+  return (
+    <>
+      {!hasLoaded && <Loading />}
+      {hasLoaded && <img src={localUrl} />}
+    </>
+  );
 };
 
-export default ImageWrapper;
+export default Image;
