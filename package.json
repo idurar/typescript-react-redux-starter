@@ -48,7 +48,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000",
   "devDependencies": {
     "@types/redux-logger": "^3.0.8",
     "@types/styled-components": "^5.1.10",

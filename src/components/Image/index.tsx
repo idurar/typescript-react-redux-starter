@@ -6,7 +6,7 @@ const Image: React.FC<{ src: string }> = ({ src }) => {
   const { hasLoaded, hasError, localUrl } = useImage(src);
 
   if (hasError) {
-    return null;
+    return <p>Error No Image </p>;
   }
 
   return (
