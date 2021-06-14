@@ -1,18 +1,20 @@
 import * as actionTypes from "./types";
 
 type stateProps = {
-  result: Array<any> | {};
+  result: Array<any>;
+  nextPage: number;
   isLoading: boolean;
   isSuccess: boolean;
 };
 
 type actionProps = {
   type: string;
-  payload?: stateProps["result"] | null;
+  payload?: stateProps["result"] | [];
 };
 
 const INITIAL_STATE: stateProps = {
   result: [],
+  nextPage: 0,
   isLoading: false,
   isSuccess: false,
 };
@@ -21,7 +23,7 @@ const imagesReducer = (
   state: stateProps = INITIAL_STATE,
   action: actionProps
 ) => {
-  const { payload = null } = action;
+  const { payload = [] } = action;
   switch (action.type) {
     case actionTypes.RESET_STATE:
       return INITIAL_STATE;
@@ -39,7 +41,8 @@ const imagesReducer = (
       };
     case actionTypes.REQUEST_SUCCESS:
       return {
-        result: payload,
+        result: [...state["result"], ...payload],
+        nextPage: state.nextPage + 1,
         isLoading: false,
         isSuccess: true,
       };

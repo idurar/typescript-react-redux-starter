@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: #eee;
+  background-image: linear-gradient(0deg, #018382, #259cd4);
   width: 60px;
   min-height: 100vh;
   float: left;
-  position: static;
+  position: fixed;
   z-index: 999;
   overflow: hidden;
   top: 0;
@@ -20,16 +20,20 @@ export const MenuList = styled.li`
   display: inline-block;
   padding: 10px;
   margin: 4px 8px;
-  border: 1px solid #ccc;
 
   height: 46px;
   cursor: pointer;
 
   border-radius: 6px;
   position: relative;
+  &.active {
+    border: 1px solid #fff;
+  }
   &:hover {
+    border: 1px solid #fff;
+    background: #fff;
     svg {
-      fill: #333;
+      fill: #259cd4;
     }
   }
   a {
@@ -40,6 +44,10 @@ export const MenuList = styled.li`
     top: 0;
     left: 0;
     padding: 10px;
+  }
+  a.active {
+    border: 1px solid #fff;
+    border-radius: 6px;
   }
   svg {
     width: 24px;

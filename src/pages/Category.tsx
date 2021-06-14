@@ -3,8 +3,13 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { images } from "../redux/images/actions";
 import Image from "../components/Image";
-import { selectImageList } from "../redux/images/selectors";
+import {
+  selectImageList,
+  selectNextPage,
+  selectImage,
+} from "../redux/images/selectors";
 import { DefaultLayout } from "../layout";
+import Loading from "../components/Loading";
 
 type imageProps = {
   id: string;
@@ -17,46 +22,42 @@ type ListProps = {
 const ImagesList: React.FC<ListProps> = ({ list }) => {
   return (
     <>
-      {list.map((item: imageProps) => (
-        <Image key={item.id} src={item.url} />
+      {list.map((item: imageProps, index) => (
+        <Image key={index} src={item.url} />
       ))}
     </>
   );
 };
 
-// const Menu: React.FC<MenuProps> = ({ list }) => {
-//   return (
-//     <MenuUl>
-//       {list.map((item: MenuItemProps, index) => (
-//         <MenuItem
-//           name={item.name}
-//           key={item.id || index}
-//           id={item.id}
-//         ></MenuItem>
-//       ))}
-//     </MenuUl>
-//   );
-// };
 const Category: React.FC = () => {
   interface ParamTypes {
     id: string;
   }
   const { id } = useParams<ParamTypes>();
-  console.log("id : ", id);
+  const { isLoading } = useSelector(selectImage);
   const list = useSelector(selectImageList);
+  const nextPage = useSelector(selectNextPage);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(images.search("images", id, 10));
+    dispatch(images.resetState());
+    dispatch(images.search("images", id, 0));
   }, [id]);
-  useEffect(() => {
-    console.log("images : ", list);
-  }, [list]);
+
+  const loadMore = () => {
+    dispatch(images.search("images", id, nextPage));
+  };
 
   return (
     <DefaultLayout>
-      <h1>Category Page {id}</h1>
-      <button>Back Category</button>
+      {isLoading && (
+        <div style={{ position: "relative", marginBottom: "50px" }}>
+          <Loading></Loading>
+        </div>
+      )}
       <ImagesList list={list} />
+      <button onClick={loadMore}>Load More</button>
     </DefaultLayout>
   );
 };

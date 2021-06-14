@@ -15,4 +15,38 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background: #fbfcff;
+}
+
+button {
+  color: #fff;
+  background-color: #259cd4;
+  border: 1px solid #2393c7;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  overflow: visible;
+  text-transform: none;
+  height: 42px;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 30px;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+button:hover {
+  border: 1px solid #046694;
 }

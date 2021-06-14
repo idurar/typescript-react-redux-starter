@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { category } from "../../redux/category/actions";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { selectCategoryList } from "../../redux/category/selectors";
 
@@ -18,12 +19,16 @@ type MenuProps = {
 };
 
 const MenuItem: React.FC<MenuItemProps> = ({ name, id }) => {
+  interface ParamTypes {
+    id: string;
+  }
+
   return (
     <MenuList>
-      <Link to={`/category/${id}`}>
+      <NavLink to={`/category/${id}`} activeClassName="active">
         <Icon name={name}></Icon>
         <span>{name}</span>
-      </Link>
+      </NavLink>
     </MenuList>
   );
 };

@@ -15,13 +15,13 @@ export const images = {
     });
   },
   search:
-    (entity: string, category: string, limit: number) =>
+    (entity: string, category: string, page: number, limit?: number) =>
     async (dispatch: Dispatch<any>) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
       });
 
-      let data = await request.search(entity, { category, limit });
+      let data = await request.search(entity, { category, page, limit });
 
       if (data.success === true) {
         let result: any[] = [];

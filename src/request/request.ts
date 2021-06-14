@@ -26,18 +26,19 @@ const axiosInstance = axios.create({
 
 type Ioption = {
   category: string;
-  limit: number;
+  limit?: number | undefined;
+  page: number;
 };
 
 const request = {
-  search: async (entity: string, { category, limit = 10 }: Ioption) => {
+  search: async (entity: string, { category, page, limit = 10 }: Ioption) => {
     try {
       let query = "";
 
       let categoryQuery = category ? "category_ids=" + category : "";
       let limitQuery = limit ? "&limit=" + limit : "";
-      query = `?${categoryQuery}${limitQuery}`;
-
+      let pageQuery = page ? "&page=" + page : "";
+      query = `?${categoryQuery}${limitQuery}${pageQuery}`;
       const response = await axiosInstance.get(entity + "/search" + query);
       return { success: true, result: response.data };
     } catch (error) {

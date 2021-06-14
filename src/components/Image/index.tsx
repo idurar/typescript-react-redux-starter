@@ -1,8 +1,9 @@
 import React from "react";
 import { useImage } from "../../hooks/useImage";
 import Loading from "../Loading";
+import { WhiteBox } from "./style";
 
-const Image: React.FC<{ src: string }> = ({ src }) => {
+const LoadImage: React.FC<{ src: string }> = ({ src }) => {
   const { hasLoaded, hasError, localUrl } = useImage(src);
 
   if (hasError) {
@@ -11,9 +12,17 @@ const Image: React.FC<{ src: string }> = ({ src }) => {
 
   return (
     <>
-      {!hasLoaded && <Loading />}
+      {!hasLoaded && <Loading></Loading>}
       {hasLoaded && <img src={localUrl} />}
     </>
+  );
+};
+
+const Image: React.FC<{ src: string }> = ({ src }) => {
+  return (
+    <WhiteBox>
+      <LoadImage src={src} />
+    </WhiteBox>
   );
 };
 
