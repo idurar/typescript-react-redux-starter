@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { DefaultLayout } from "../layout";
 import history from "../utils/history";
 
 const NotFound: React.FC = () => {
@@ -6,10 +8,12 @@ const NotFound: React.FC = () => {
     history.replace("/notfound");
   }, []);
   return (
-    <div>
+    <DefaultLayout>
       <p>Not Found</p>
-      <button>Back Home</button>
-    </div>
+      <Link to="/">
+        <button>Back Home</button>
+      </Link>
+    </DefaultLayout>
   );
 };
 export default NotFound;

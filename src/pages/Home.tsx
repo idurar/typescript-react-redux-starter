@@ -1,24 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Navigation from "../components/Navigation";
-import { category } from "../redux/category/actions";
-import { selectCategoryList } from "../redux/category/selectors";
-const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  const state = useSelector(selectCategoryList);
+import React from "react";
 
-  useEffect(() => {
-    console.log("useSelector(selectCategory)", state);
-  }, [state]);
-  useEffect(() => {
-    dispatch(category.list("categories"));
-  }, []);
+import { DefaultLayout } from "../layout";
+
+const Home: React.FC = () => {
   return (
-    <>
-      <Navigation></Navigation>
-      <h1>Home Page</h1>
-      <button>Back Home</button>
-    </>
+    <DefaultLayout>
+      <h1>Welcome to Cat App</h1>
+    </DefaultLayout>
   );
 };
 export default Home;

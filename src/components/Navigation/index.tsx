@@ -1,11 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { category } from "../../redux/category/actions";
+import { NavLink } from "react-router-dom";
 
 import { selectCategoryList } from "../../redux/category/selectors";
-// import history from "../../utils/history";
+
 import { Icon } from "../Icon";
+import { Nav, MenuList, MenuUl } from "./style";
 
 type MenuItemProps = {
   name: string;
@@ -16,19 +19,23 @@ type MenuProps = {
 };
 
 const MenuItem: React.FC<MenuItemProps> = ({ name, id }) => {
+  interface ParamTypes {
+    id: string;
+  }
+
   return (
-    <li>
-      <Link to={`/category/${id}`}>
+    <MenuList>
+      <NavLink to={`/category/${id}`} activeClassName="active">
         <Icon name={name}></Icon>
         <span>{name}</span>
-      </Link>
-    </li>
+      </NavLink>
+    </MenuList>
   );
 };
 
 const Menu: React.FC<MenuProps> = ({ list }) => {
   return (
-    <ul>
+    <MenuUl>
       {list.map((item: MenuItemProps, index) => (
         <MenuItem
           name={item.name}
@@ -36,12 +43,20 @@ const Menu: React.FC<MenuProps> = ({ list }) => {
           id={item.id}
         ></MenuItem>
       ))}
-    </ul>
+    </MenuUl>
   );
 };
 
 const Navigation: React.FC = () => {
   const state = useSelector(selectCategoryList);
-  return <Menu list={state} />;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(category.list("categories"));
+  }, []);
+  return (
+    <Nav>
+      <Menu list={state} />
+    </Nav>
+  );
 };
 export default Navigation;

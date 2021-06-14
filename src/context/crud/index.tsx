@@ -1,11 +1,10 @@
 import React, { useMemo, useReducer, createContext, useContext } from "react";
 import { initialState, contextReducer } from "./reducer";
 import contextActions from "./actions";
-import contextSelectors from "./selectors";
 
-const CategoryContext = createContext();
+const CategoryContext = createContext<any | null>(null);
 
-function CategoryContextProvider({ children }) {
+const CategoryContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(contextReducer, initialState);
   const value = useMemo(() => [state, dispatch], [state]);
 
@@ -14,10 +13,10 @@ function CategoryContextProvider({ children }) {
       {children}
     </CategoryContext.Provider>
   );
-}
+};
 
 function useCategoryContext() {
-  const context = useContext(CategoryContext);
+  const context = useContext<any>(CategoryContext);
   if (context === undefined) {
     throw new Error(
       "useCategoryContext must be used within a CategoryContextProvider"
@@ -25,8 +24,7 @@ function useCategoryContext() {
   }
   const [state, dispatch] = context;
   const categoryContextAction = contextActions(dispatch);
-  const categoryContextSelector = contextSelectors(state);
-  return { state, categoryContextAction, categoryContextSelector };
+  return { state, categoryContextAction };
 }
 
 export { CategoryContextProvider, useCategoryContext };

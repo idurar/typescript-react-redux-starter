@@ -1,51 +1,64 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Navigation from "../components/Navigation";
-import { category } from "../redux/category/actions";
-import { selectCategoryById } from "../redux/category/selectors";
+import { images } from "../redux/images/actions";
+import Image from "../components/Image";
+import {
+  selectImageList,
+  selectNextPage,
+  selectImage,
+} from "../redux/images/selectors";
+import { DefaultLayout } from "../layout";
+import Loading from "../components/Loading";
+
+type imageProps = {
+  id: string;
+  url: string;
+};
+
+type ListProps = {
+  list: any[];
+};
+const ImagesList: React.FC<ListProps> = ({ list }) => {
+  return (
+    <>
+      {list.map((item: imageProps, index) => (
+        <Image key={index} src={item.url} />
+      ))}
+    </>
+  );
+};
 
 const Category: React.FC = () => {
-  const dispatch = useDispatch();
   interface ParamTypes {
     id: string;
   }
   const { id } = useParams<ParamTypes>();
-  console.log("id : ", id);
-  const category = useSelector(selectCategoryById(id));
+  const { isLoading } = useSelector(selectImage);
+  const list = useSelector(selectImageList);
+  const nextPage = useSelector(selectNextPage);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log("category : ", category);
-  }, [category]);
+    dispatch(images.resetState());
+    dispatch(images.search("images", id, 0));
+  }, [id]);
+
+  const loadMore = () => {
+    dispatch(images.search("images", id, nextPage));
+  };
 
   return (
-    <>
-      <h1>Category Page {id}</h1>
-      <button>Back Category</button>
-    </>
+    <DefaultLayout>
+      {isLoading && (
+        <div style={{ position: "relative", marginBottom: "50px" }}>
+          <Loading></Loading>
+        </div>
+      )}
+      <ImagesList list={list} />
+      <button onClick={loadMore}>Load More</button>
+    </DefaultLayout>
   );
 };
 export default Category;
-
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import Navigation from "../components/Navigation";
-// import { category } from "../redux/category/actions";
-// import { selectCategoryList } from "../redux/category/selectors";
-// const Home: React.FC = () => {
-//   const dispatch = useDispatch();
-//   const state = useSelector(selectCategoryList);
-
-//   useEffect(() => {
-//     console.log("useSelector(selectCategory)", state);
-//   }, [state]);
-//   useEffect(() => {
-//     dispatch(category.list("categories"));
-//   }, []);
-//   return (
-//     <>
-//       <Navigation></Navigation>
-//       <h1>Home Page</h1>
-//       <button>Back Home</button>
-//     </>
-//   );
-// };

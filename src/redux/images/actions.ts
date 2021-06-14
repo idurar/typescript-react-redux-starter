@@ -1,6 +1,12 @@
 import { Dispatch } from "redux";
 import * as actionTypes from "./types";
 import { request } from "../../request";
+import { isAnyOf } from "@reduxjs/toolkit";
+
+type itemProps = {
+  id: string;
+  url: string;
+};
 
 export const images = {
   resetState: () => async (dispatch: Dispatch<any>) => {
@@ -8,19 +14,26 @@ export const images = {
       type: actionTypes.RESET_STATE,
     });
   },
-  list:
-    (entity: string, category: string, limit: number) =>
+  search:
+    (entity: string, category: string, page: number, limit?: number) =>
     async (dispatch: Dispatch<any>) => {
       dispatch({
         type: actionTypes.REQUEST_LOADING,
       });
 
-      let data = await request.search(entity, { category, limit });
+      let data = await request.search(entity, { category, page, limit });
 
       if (data.success === true) {
+        let result: any[] = [];
+        data.result.map((item: itemProps): void => {
+          result.push({
+            id: item.id,
+            url: item.url,
+          });
+        });
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
-          payload: data.result,
+          payload: result,
         });
       } else {
         dispatch({

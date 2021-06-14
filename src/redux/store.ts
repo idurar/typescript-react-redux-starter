@@ -15,8 +15,7 @@ declare global {
   }
 }
 
-const composeEnhancers: any =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 if (process.env.NODE_ENV === "development") {
   middleware = [...middleware, logger];

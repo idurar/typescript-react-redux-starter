@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import Loading from "../components/Loading";
 
-import PageLoader from "../components/PageLoader";
 import routes from "./config";
 
 const NotFound = lazy(
@@ -9,7 +9,7 @@ const NotFound = lazy(
 );
 const Router: React.FC = () => {
   return (
-    <Suspense fallback={<PageLoader />}>
+    <Suspense fallback={<Loading />}>
       <Switch>
         {routes.map((routeItem) => {
           return (
