@@ -1,5 +1,7 @@
 # Typescript React Redux Starter Project
 
+Clean and Simple Architecture : Typescript React Redux Starter Project with redux-thunk hooks , fetch api
+
 
 ## Available Scripts
 
