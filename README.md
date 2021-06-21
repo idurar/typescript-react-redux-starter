@@ -4,20 +4,24 @@ Real World App React / Redux / Typescript Clean and Simple Architecture : Typesc
 
 ## Project Details
 
-Build a simple React-Redux application which displays images from cat API. Here's the API https://docs.thecatapi.com/api-reference/images/images-search
+Build a simple React-Redux application which displays images from cat API. Here's the API :
+https://docs.thecatapi.com/api-reference/images/images-search
+
 Example URL to fetch 10 cats with category hats:
 https://api.thecatapi.com/v1/images/search?limit=10&category_ids=1
+
 Example URL to fetch the categories:
 https://api.thecatapi.com/v1/categories
 
 The page is a simple app that loads a sidebar (drawer for react native) of all categories and displays 10 cat images in the main display.
-● All the categories are clickable - you can click on them and choose a different category
-● There is a button to load more cat images at the bottom, which will load 10 more cat
+
+* All the categories are clickable - you can click on them and choose a different category
+* There is a button to load more cat images at the bottom, which will load 10 more cat
 images.
-● The app must be built with react-redux
-● Don't use any premade UI kit lib, write all styles purely, (StyledComponents library is
+* The app must be built with react-redux
+* Don't use any premade UI kit lib, write all styles purely, (StyledComponents library is
 highly recommended)
-● Aesthetics and clean code are important when building this small prototype.
+* Aesthetics and clean code are important when building this small prototype.
 
 ## Available Scripts
 
